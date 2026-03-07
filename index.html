@@ -33,7 +33,58 @@
       referrerpolicy="no-referrer"
     />
   </head>
-  <body>
-    <h1 class="bg-neutral text-white">hello</h1>
+  <body class="bg-[#F8FAFC] py-20 min-h-screen">
+    <div
+      class="max-w-lg bg-white mx-auto rounded-lg border border-white shadow-xl p-8"
+    >
+      <div class="mx-auto text-center">
+        <img src="./assets/github-logo.png" class="mx-auto" alt="" />
+        <h1 class="text-2xl font-semibold">GitHub Issues Tracker</h1>
+        <h3 class="text-slate-500">Sign in to manage your issues</h3>
+      </div>
+
+      <div class="form">
+        <div class="card bg-base-100 w-full shrink-0 mx-auto">
+          <div class="card-body">
+            <fieldset class="fieldset">
+              <label class="label font-medium text-gray-800 text-base mb-2"
+                >Username</label
+              >
+              <input
+                type="text"
+                class="input w-full text-base text-slate-500 placeholder:text-slate-500 mb-1.5 rounded-lg"
+                placeholder="Enter Username"
+              />
+              <p class="text-[#4a00ff] text-sm mb-4">Default: admin</p>
+              <label class="label font-medium text-gray-800 text-base mb-2"
+                >Password</label
+              >
+              <input
+                type="password"
+                class="input w-full text-base text-slate-500 placeholder:text-slate-500 mb-1.5 rounded-lg"
+                placeholder="Password"
+              />
+              <p class="text-[#4a00ff] text-sm mb-4">Default: admin123</p>
+              <button class="btn btn-primary mt-4 text-base font-semibold rounded-lg">
+                Sign In
+              </button>
+              <div class="flex justify-start items-center gap-3 my-6">
+                <hr class="w-[45%] inline-block border-[#e4e4e7FF]" />
+                <span class="text-[#1f2937FF] text-base">OR</span>
+                <hr class="w-[45%] inline-block border-[#e4e4e7FF]" />
+              </div>
+
+              <div class="">
+                <h2 class="text-slate-500 text-center mb-2">Demo Credentials:</h2>
+                <div class="bg-[#f8fafcFF] rounded-lg py-6 text-center">
+                    <p class="text-base"><span class="text-base font-semibold text-[#1f2937FF]">Username: </span>admin</p>
+                    <p class="text-base"><span class="text-base font-semibold text-[#1f2937FF]">Password: </span>admin123</p>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
