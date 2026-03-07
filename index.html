@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GitHub Issue Tracker Login</title>
+    <title>GitHub Issue Tracker | Login</title>
 
     <!-- daisyUi and tailwind -->
     <link
@@ -39,7 +39,7 @@
     >
       <div class="mx-auto text-center">
         <img src="./assets/github-logo.png" class="mx-auto" alt="" />
-        <h1 class="text-2xl font-semibold">GitHub Issues Tracker</h1>
+        <h1 class="text-2xl font-semibold text-[#1f2937FF]">GitHub Issues Tracker</h1>
         <h3 class="text-slate-500">Sign in to manage your issues</h3>
       </div>
 
@@ -51,6 +51,7 @@
                 >Username</label
               >
               <input
+                id="user-name"
                 type="text"
                 class="input w-full text-base text-slate-500 placeholder:text-slate-500 mb-1.5 rounded-lg"
                 placeholder="Enter Username"
@@ -60,12 +61,13 @@
                 >Password</label
               >
               <input
+              id="password"
                 type="password"
                 class="input w-full text-base text-slate-500 placeholder:text-slate-500 mb-1.5 rounded-lg"
                 placeholder="Password"
               />
               <p class="text-[#4a00ff] text-sm mb-4">Default: admin123</p>
-              <button class="btn btn-primary mt-4 text-base font-semibold rounded-lg">
+              <button onclick="logIn()" id="sign-in-btn" class="btn btn-primary mt-4 text-base font-semibold rounded-lg">
                 Sign In
               </button>
               <div class="flex justify-start items-center gap-3 my-6">
@@ -86,5 +88,8 @@
         </div>
       </div>
     </div>
+
+
+    <script src="./script/login.js"></script>
   </body>
 </html>
