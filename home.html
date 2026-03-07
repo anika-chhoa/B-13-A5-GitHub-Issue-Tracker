@@ -65,5 +65,17 @@
         <button class="btn btn-primary text-white text-base"><i class="fa-solid fa-plus"></i> New Issue</button>
       </div>
     </header>
+    <main class="max-w-[70%] mx-auto py-15">
+        <section class="button-container bg-white p-6 border-white rounded-lg flex items-center gap-2">
+            <button onclick="toggleBtn('all')" id="btn-all" class="btn btn-primary w-[120px] text-white">All</button>
+            <button onclick="toggleBtn('open')" id="btn-open" class="btn bg-white text-slate-500 text-base font-medium border border-[#e4e4e7FF] w-[120px] py-2 px-3 rounded-lg">Open</button>
+            <button onclick="toggleBtn('close')" id="btn-close" class="btn bg-white text-slate-500 text-base font-medium border border-[#e4e4e7FF] w-[120px] py-2 px-3 rounded-lg">Close</button>
+        </section>
+
+        
+    </main>
+
+
+    <script src="./script/home.js"></script>
   </body>
 </html>
