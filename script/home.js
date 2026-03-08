@@ -4,6 +4,7 @@ const btnInactive = ["bg-white", "text-slate-500", "border-[#e4e4e7FF]"];
 const cardContainer = document.getElementById("card-container");
 const issueCount = document.getElementById("issue-count");
 const cardInfo = document.getElementById("card-info");
+const loadContainer = document.getElementById("load-container");
 
 let data = [];
 
@@ -32,6 +33,18 @@ const toggleBtn = (tab) => {
     ).length;
   }
 };
+
+const addLoadSpinner=(load)=>{
+  if(load){
+        loadContainer.classList.remove("hidden");
+        cardContainer.classList.add("hidden")
+    }else{
+        loadContainer.classList.add("hidden");
+        cardContainer.classList.remove("hidden")
+
+
+    }
+}
 
 const displayPriority = (priority) => {
   if (priority === "high") {
@@ -85,6 +98,35 @@ const labels = (arr) => {
     },
   };
 
+// const labels = (arr) => {
+//   const labelInfo = {
+//     bug: {
+//       color: "#ef4444",
+//       bg: "#feecec",
+//       border: "#fecaca",
+//     },
+//     "help wanted": {
+//       color: "#d97706",
+//       bg: "#fff8db",
+//       border: "#fde68a",
+//     },
+//     enhancement: {
+//       color: "#16a34a",
+//       bg: "#dcfce7",
+//       border: "#86efac",
+//     },
+//     "good first issue": {
+//       color: "#2563eb",
+//       bg: "#dbeafe",
+//       border: "#93c5fd",
+//     },
+//     documentation: {
+//       color: "#6b7280",
+//       bg: "#f3f4f6",
+//       border: "#d1d5db",
+//     },
+//   };
+
   return arr
     .map((label) => {
       const style = labelInfo[label.toLowerCase()];
@@ -104,9 +146,11 @@ const formatDate = (isoDate) => {
   };
 
 const cardDetails=async (id)=>{
+  addLoadSpinner(true);
   const res=await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`);
   const json=await res.json();
   displayDetails(json.data);
+  addLoadSpinner(false);
   document.getElementById("card-details").showModal();
 }
   const displayDetails=(card)=>{
@@ -153,12 +197,14 @@ const cardDetails=async (id)=>{
 }
 
 const allCards = async () => {
+  addLoadSpinner(true)
   const res = await fetch(
     "https://phi-lab-server.vercel.app/api/v1/lab/issues",
   );
   const json = await res.json();
   data = json.data;
   display(data);
+  addLoadSpinner(false);
   issueCount.innerText = json.data.length;
 };
 
@@ -177,7 +223,7 @@ const display = (cards) => {
         <div class="card-top p-4 h-full">
                         <div class="flex justify-between items-center mb-3">
                         <div class="status-icon flex justify-center items-center w-6 h-6">
-                            ${card.status === "open" ? `<img src="../assets/Open-Status.png" alt=""></img>` : `<img src="../assets/Closed- Status .png" alt="">`}
+                            ${card.status === "open" ? `<img src="assets/open-status.png" alt=""></img>` : `<img src="assets/closed-status.png" alt="">`}
                             
                         </div>
                         

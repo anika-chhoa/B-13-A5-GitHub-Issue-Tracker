@@ -9,7 +9,7 @@ const logIn = () => {
     return;
   }
   if(userName==="admin" && password==="admin123"){
-    window.location.assign('/home.html')
+    window.location.assign('home.html')
   }else{
     if(userName!=="admin"){
         alert("Wrong Username")
