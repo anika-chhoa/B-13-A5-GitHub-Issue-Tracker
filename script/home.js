@@ -3,8 +3,9 @@ const btnActive = ["btn-primary", "text-white"];
 const btnInactive = ["bg-white", "text-slate-500", "border-[#e4e4e7FF]"];
 const cardContainer = document.getElementById("card-container");
 const issueCount = document.getElementById("issue-count");
+const cardInfo = document.getElementById("card-info");
 
-let data=[];
+let data = [];
 
 const toggleBtn = (tab) => {
   buttonArr.forEach((btn) => {
@@ -17,16 +18,18 @@ const toggleBtn = (tab) => {
       buttonName.classList.remove(...btnActive);
     }
   });
-  
+
   if (tab === "all") {
     display(data);
-    issueCount.innerText=data.length;
+    issueCount.innerText = data.length;
   } else if (tab === "open") {
     display(data.filter((card) => card.status === "open"));
     issueCount.innerText = data.filter((card) => card.status === "open").length;
   } else {
     display(data.filter((card) => card.status === "closed"));
-    issueCount.innerText = data.filter((card) => card.status === "closed").length;
+    issueCount.innerText = data.filter(
+      (card) => card.status === "closed",
+    ).length;
   }
 };
 
@@ -94,36 +97,82 @@ const labels = (arr) => {
     .join(" ");
 };
 
+const formatDate = (isoDate) => {
+    const date = new Date(isoDate);
+    const formatted = date.toLocaleDateString("en-GB");
+    return formatted;
+  };
 
+const cardDetails=async (id)=>{
+  const res=await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`);
+  const json=await res.json();
+  displayDetails(json.data);
+  document.getElementById("card-details").showModal();
+}
+  const displayDetails=(card)=>{
+  cardInfo.innerHTML="";
+  const div=document.createElement("div");
+  div.innerHTML=`
+  <div class="card-info-container">
+          <dialog id="card-details" class="modal modal-bottom sm:modal-middle">
+            <div class="modal-box p-8">
+              <h3 class="text-2xl font-bold mb-2">${card.title}</h3>
+              <ul class="flex gap-2 mb-6">
+                <li class="badge badge-success text-white font-medium border rounded-[100px]">${card.status}</li>
+                <li class="text-slate-600 flex justify-center items-center gap-2">
+                    <div class="bg-slate-600 w-1 h-1 rounded-full"></div>
+                    <p>Opened by ${card.author}</p>
+                </li>
+                <li class="text-slate-600 flex justify-center items-center gap-2">
+                    <div class="bg-slate-600 w-1 h-1 rounded-full"></div>
+                    <p>${formatDate(card.createdAt)}</p>
+                </li>
+              </ul>
+              <div class="flex gap-1 mb-6">${labels(card.labels)}</div>
+              <p class="text-slate-600 mb-7">${card.description}</p>
+              <div class="bg-[#f8fafcFF] rounded-l-lg p-4 grid grid-cols-2">
+                <div class="col-span-1">
+                  <p class="text-slate-600">Assignee:</p>
+                  <p class="text-[#1f2937FF] font-semibold">${card.assignee ? card.assignee : "Unassigned"}</p>
+                </div>
+                <div class="col-span-1">
+                  <p class="text-slate-600">Priority:</p>
+                  <p>${displayPriority(card.priority)}</p>
+                </div>
+              </div>
+              <div class="modal-action">
+                <form method="dialog">
+                  <button class="btn btn-primary hover:text-white">Close</button>
+                </form>
+              </div>
+            </div>
+          </dialog>
+        </div>
+  `;
+  cardInfo.appendChild(div);
+}
 
 const allCards = async () => {
   const res = await fetch(
     "https://phi-lab-server.vercel.app/api/v1/lab/issues",
   );
-  const json = await res.json()
-  data=json.data;
-  
-
+  const json = await res.json();
+  data = json.data;
   display(data);
-//   const displayAll = display(json.data);
-//   const displayOpen = display(
-//     json.data.filter((card) => card.status === "open"),
-//   );
   issueCount.innerText = json.data.length;
 };
 
 const display = (cards) => {
   cardContainer.innerHTML = "";
-  issueCount.innerText ="";
+  issueCount.innerText = "";
 
-  const formatDate = (isoDate) => {
-    const date = new Date(isoDate);
-    const formatted = date.toLocaleDateString("en-GB");
-    return formatted;
-  };
+
   cards.forEach((card) => {
     const div = document.createElement("div");
-    div.className = `card border border-[#e4e4e7FF] ${card.status === "open" ? "border-4 border-t-green-500" : "border-4 border-t-violet-500"} rounded-md shadow-md`;
+    div.className = `card border border-[#e4e4e7FF] hover:scale-102 transition ${card.status === "open" ? "border-4 border-t-green-500" : "border-4 border-t-violet-500"} rounded-md shadow-md`;
+    div.addEventListener("click", ()=>{
+        cardDetails(card.id)
+    })
     div.innerHTML = `
         <div class="card-top p-4 h-full">
                         <div class="flex justify-between items-center mb-3">
@@ -159,5 +208,3 @@ const display = (cards) => {
   });
 };
 allCards();
-
-

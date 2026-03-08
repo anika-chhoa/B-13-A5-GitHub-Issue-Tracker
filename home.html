@@ -62,80 +62,116 @@
           </svg>
           <input type="search" required placeholder="Search Issues" />
         </label>
-        <button class="btn btn-primary text-white text-base"><i class="fa-solid fa-plus"></i> New Issue</button>
+        <button class="btn btn-primary text-white text-base">
+          <i class="fa-solid fa-plus"></i> New Issue
+        </button>
       </div>
     </header>
     <main class="max-w-[70%] mx-auto py-15">
-        <section class="button-container bg-white p-6 border-white rounded-lg flex items-center gap-2 shadow-md mb-4">
-            <button onclick="toggleBtn('all')" id="btn-all" class="btn btn-primary w-[120px] text-white">All</button>
-            <button onclick="toggleBtn('open')" id="btn-open" class="btn bg-white text-slate-500 text-base font-medium border border-[#e4e4e7FF] w-[120px] py-2 px-3 rounded-lg">Open</button>
-            <button onclick="toggleBtn('close')" id="btn-close" class="btn bg-white text-slate-500 text-base font-medium border border-[#e4e4e7FF] w-[120px] py-2 px-3 rounded-lg">Close</button>
-        </section>
+      <section
+        class="button-container bg-white p-6 border-white rounded-lg flex items-center gap-2 shadow-md mb-4"
+      >
+        <button
+          onclick="toggleBtn('all')"
+          id="btn-all"
+          class="btn btn-primary w-[120px] text-white"
+        >
+          All
+        </button>
+        <button
+          onclick="toggleBtn('open')"
+          id="btn-open"
+          class="btn bg-white text-slate-500 text-base font-medium border border-[#e4e4e7FF] w-[120px] py-2 px-3 rounded-lg"
+        >
+          Open
+        </button>
+        <button
+          onclick="toggleBtn('close')"
+          id="btn-close"
+          class="btn bg-white text-slate-500 text-base font-medium border border-[#e4e4e7FF] w-[120px] py-2 px-3 rounded-lg"
+        >
+          Close
+        </button>
+      </section>
 
-        <section class="trac-issue bg-white p-6 border-white rounded-t-lg shadow-md flex justify-between">
-            <div class="issue-left flex gap-2">
-                <div class="w-[50px] h-[50px] rounded-full bg-[#ece4ffFF] flex justify-center items-center">
-                    <img src="./assets/Aperture.png" alt="">
+      <section
+        class="trac-issue bg-white p-6 border-white rounded-t-lg shadow-md flex justify-between"
+      >
+        <div class="issue-left flex gap-2">
+          <div
+            class="w-[50px] h-[50px] rounded-full bg-[#ece4ffFF] flex justify-center items-center"
+          >
+            <img src="./assets/Aperture.png" alt="" />
+          </div>
+          <div class="">
+            <h1 class="text-[#1f2937FF] text-xl font-semibold">
+              <span id="issue-count"></span> Issues
+            </h1>
+            <h3 class="text-slate-500 text-base">
+              Track and manage your project issues
+            </h3>
+          </div>
+        </div>
+
+        <div class="issue-right flex gap-4">
+          <div class="flex gap-2 justify-center items-center">
+            <div class="bg-emerald-500 w-3 h-3 rounded-full"></div>
+            <p class="text-[#1f2937FF] font-medium">Open</p>
+          </div>
+          <div class="flex gap-2 justify-center items-center">
+            <div class="bg-purple-500 w-3 h-3 rounded-full"></div>
+            <p class="text-[#1f2937FF] font-medium">Close</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-[#fbfbfbFF] rounded-b-lg p-6 shadow-md">
+        <div id="card-container" class="grid grid-cols-4 gap-3">
+          <div
+            class="card border border-[#e4e4e7FF] rounded-md shadow-md"
+          ></div>
+        </div>
+      </section>
+
+      <!-- single card details -->
+      <div id="card-info">
+        <div class="card-info-container">
+          <dialog id="card-details" class="modal modal-bottom sm:modal-middle">
+            <div class="modal-box p-8">
+              <h3 class="text-2xl font-bold mb-2">Fix broken image uploads</h3>
+              <ul class="flex gap-2 mb-6">
+                <li class="badge badge-success text-white font-medium border rounded-[100px]">Opened</li>
+                <li class="text-slate-600 flex justify-center items-center gap-2">
+                    <div class="bg-slate-600 w-1 h-1 rounded-full"></div>
+                    <p>Opened by Fahim Ahmed</p>
+                </li>
+                <li class="text-slate-600 flex justify-center items-center gap-2">
+                    <div class="bg-slate-600 w-1 h-1 rounded-full"></div>
+                    <p>22/02/2026</p>
+                </li>
+              </ul>
+              <div class="flex gap-1 mb-6"></div>
+              <p class="text-slate-600 mb-7">The navigation menu doesn't collapse properly on mobile devices. Need to fix the responsive behavior.</p>
+              <div class="bg-[#f8fafcFF] rounded-l-lg p-4 grid grid-cols-2">
+                <div class="col-span-1">
+                  <p class="text-slate-600">Assignee:</p>
+                  <p class="text-[#1f2937FF] font-semibold">Fahim</p>
                 </div>
-                <div class="">
-                    <h1 class="text-[#1f2937FF] text-xl font-semibold"><span id="issue-count"></span> Issues</h1>
-                    <h3 class="text-slate-500 text-base">Track and manage your project issues</h3>
+                <div class="col-span-1">
+                  <p class="text-slate-600">Priority:</p>
+                  <p class="badge badge-error text-white font-medium">High</p>
                 </div>
+              </div>
+              <div class="modal-action">
+                <form method="dialog">
+                  <button class="btn btn-primary text-white">Close</button>
+                </form>
+              </div>
             </div>
-
-
-            <div class="issue-right flex gap-4">
-                <div class="flex gap-2 justify-center items-center">
-                    <div class="bg-emerald-500 w-3 h-3 rounded-full"></div>
-                <p class="text-[#1f2937FF] font-medium">Open</p>
-                </div>
-                <div class="flex gap-2 justify-center items-center">
-                    <div class="bg-purple-500 w-3 h-3 rounded-full"></div>
-                <p class="text-[#1f2937FF] font-medium">Close</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="bg-[#fbfbfbFF] rounded-b-lg p-6 shadow-md">
-            <div id="card-container" class="grid grid-cols-4 gap-3">
-                <div class="card border border-[#e4e4e7FF] rounded-md shadow-md">
-                    <!-- <div class="card-top p-4">
-                        <div class="flex justify-between items-center mb-3">
-                        <div class="status-icon flex justify-center items-center w-6 h-6">
-                            <img src="./assets/Open-Status.png" alt="">
-                        </div>
-                        <div id="status" class="w-20 p-2 text-[#ef4444FF] text-xs font-medium bg-[#feececFF] rounded-[100px] flex justify-center items-center">
-                            HIGH
-                        </div>
-                    </div>
-
-                    <h2 class="text-[#1f2937FF] text-sm font-semibold mb-2">Fix navigation menu on mobile devices</h2>
-                    <h3 class="text-slate-500 text-xs mb-3">The navigation menu doesn't collapse properly on mobile devices</h3>
-                    <div class="flex gap-1">
-                        <div class="p-2 text-[#ef4444FF] text-xs font-medium bg-[#feecec] border border-[#fecacaFF] rounded-[100px] inline-flex justify-center items-center gap-1">
-                            <i class="fa-solid fa-bug"></i>
-                            <p id="bug">BUG</p>
-                        </div>
-                        <div class="p-2 text-[#d97706FF] text-xs font-medium bg-[#fff8dbFF] border border-[#fde68aFF] rounded-[100px] inline-flex justify-center items-center gap-1">
-                            <i class="fa-solid fa-life-ring"></i>
-                            <p id="bug">HELP WANTED</p>
-                        </div>
-                    </div>
-                </div>
-                <hr class="my-2 border-t border-slate-200"/>
-                <div class="card-bottom p-4">
-                    <h3 class="text-slate-500 text-xs mb-2">#1 by john_doe</h3>
-                    <h3 class="text-slate-500 text-xs">1/15/2024</h3>
-                </div> -->
-                </div>
-            </div>
-
-
-        </section>
-
-
+          </dialog>
+        </div>
+      </div>
     </main>
-
 
     <script src="./script/home.js"></script>
   </body>
