@@ -33,17 +33,17 @@
     />
   </head>
   <body class="bg-[#F8FAFC] min-h-screen">
-    <header class="px-20 py-4 flex justify-between items-center bg-white">
-      <div class="header-left flex gap-1">
-        <div class="w-[36px]">
+    <header class="px-10 md:px-20 py-4 md:flex md:justify-between md:items-center bg-white space-y-2 md:space-y-0">
+      <div class="header-left md:flex gap-1">
+        <div class="max-w-9">
           <img src="./assets/github-logo.png" alt="" />
         </div>
         <h1 class="text-[#1f2937FF] text-2xl font-semibold">
           GitHub Issues Tracker
         </h1>
       </div>
-      <div class="header-right flex gap-4">
-        <label class="input">
+      <div class="header-right space-y-3 md:flex md:gap-4">
+        <label  class="input cursor-pointer">
           <svg
             class="h-[1em] opacity-50"
             xmlns="http://www.w3.org/2000/svg"
@@ -60,44 +60,44 @@
               <path d="m21 21-4.3-4.3"></path>
             </g>
           </svg>
-          <input type="search" required placeholder="Search Issues" />
+          <input id="search" type="search" required placeholder="Search Issues" />
         </label>
         <button class="btn btn-primary text-white text-base">
           <i class="fa-solid fa-plus"></i> New Issue
         </button>
       </div>
     </header>
-    <main class="max-w-[75%] mx-auto py-15">
+    <main class="max-w-[82%] mx-auto py-7 md:py-15">
       <section
-        class="button-container bg-white p-6 border-white rounded-lg flex items-center gap-2 shadow-md mb-4"
+        class="button-container bg-white p-2 md:p-6 border-white rounded-lg flex justify-between md:justify-start items-center gap-2 shadow-md mb-4"
       >
         <button
           onclick="toggleBtn('all')"
           id="btn-all"
-          class="btn btn-primary w-[120px] text-white"
+          class="btn btn-primary w-20 md:w-32 text-white"
         >
           All
         </button>
         <button
           onclick="toggleBtn('open')"
           id="btn-open"
-          class="btn bg-white text-slate-500 text-base font-medium border border-[#e4e4e7FF] w-[120px] py-2 px-3 rounded-lg"
+          class="btn bg-white text-slate-500 text-base font-medium border border-[#e4e4e7FF] w-20 md:w-32 py-2 px-3 rounded-lg"
         >
           Open
         </button>
         <button
           onclick="toggleBtn('close')"
           id="btn-close"
-          class="btn bg-white text-slate-500 text-base font-medium border border-[#e4e4e7FF] w-[120px] py-2 px-3 rounded-lg"
+          class="btn bg-white text-slate-500 text-base font-medium border border-[#e4e4e7FF] w-20 md:w-32 py-2 px-3 rounded-lg"
         >
           Close
         </button>
       </section>
 
       <section
-        class="trac-issue bg-white p-6 border-white rounded-t-lg shadow-md flex justify-between"
+        class="trac-issue bg-white p-6 border-white rounded-t-lg shadow-md md:flex md:justify-between space-y-3 md:space-y-0"
       >
-        <div class="issue-left flex gap-2">
+        <div class="issue-left md:flex md:gap-2 space-y-2">
           <div
             class="w-[50px] h-[50px] rounded-full bg-[#ece4ffFF] flex justify-center items-center"
           >
@@ -129,7 +129,7 @@
         <div id="load-container" class="h-[60vh] flex hidden justify-center items-center">
           <span class="loading loading-spinner loading-xl"></span>
         </div>
-        <div id="card-container" class="grid grid-cols-4 gap-3">
+        <div id="card-container" class="grid md:grid-cols-2 lg:grid-cols-4 gap-3">
           <div
             class="card border border-[#e4e4e7FF] rounded-md shadow-md"
           ></div>
@@ -139,39 +139,6 @@
       <!-- single card details -->
       <div id="card-info">
         <div class="card-info-container">
-          <dialog id="card-details" class="modal modal-bottom sm:modal-middle">
-            <div class="modal-box p-8">
-              <h3 class="text-2xl font-bold mb-2">Fix broken image uploads</h3>
-              <ul class="flex gap-2 mb-6">
-                <li class="badge badge-success text-white font-medium border rounded-[100px]">Opened</li>
-                <li class="text-slate-600 flex justify-center items-center gap-2">
-                    <div class="bg-slate-600 w-1 h-1 rounded-full"></div>
-                    <p>Opened by Fahim Ahmed</p>
-                </li>
-                <li class="text-slate-600 flex justify-center items-center gap-2">
-                    <div class="bg-slate-600 w-1 h-1 rounded-full"></div>
-                    <p>22/02/2026</p>
-                </li>
-              </ul>
-              <div class="flex gap-1 mb-6"></div>
-              <p class="text-slate-600 mb-7">The navigation menu doesn't collapse properly on mobile devices. Need to fix the responsive behavior.</p>
-              <div class="bg-[#f8fafcFF] rounded-l-lg p-4 grid grid-cols-2">
-                <div class="col-span-1">
-                  <p class="text-slate-600">Assignee:</p>
-                  <p class="text-[#1f2937FF] font-semibold">Fahim</p>
-                </div>
-                <div class="col-span-1">
-                  <p class="text-slate-600">Priority:</p>
-                  <p class="badge badge-error text-white font-medium">High</p>
-                </div>
-              </div>
-              <div class="modal-action">
-                <form method="dialog">
-                  <button class="btn btn-primary text-white">Close</button>
-                </form>
-              </div>
-            </div>
-          </dialog>
         </div>
       </div>
     </main>

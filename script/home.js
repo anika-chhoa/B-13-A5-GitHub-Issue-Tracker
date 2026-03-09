@@ -34,17 +34,15 @@ const toggleBtn = (tab) => {
   }
 };
 
-const addLoadSpinner=(load)=>{
-  if(load){
-        loadContainer.classList.remove("hidden");
-        cardContainer.classList.add("hidden")
-    }else{
-        loadContainer.classList.add("hidden");
-        cardContainer.classList.remove("hidden")
-
-
-    }
-}
+const addLoadSpinner = (load) => {
+  if (load) {
+    loadContainer.classList.remove("hidden");
+    cardContainer.classList.add("hidden");
+  } else {
+    loadContainer.classList.add("hidden");
+    cardContainer.classList.remove("hidden");
+  }
+};
 
 const displayPriority = (priority) => {
   if (priority === "high") {
@@ -57,8 +55,7 @@ const displayPriority = (priority) => {
 };
 
 // const labels=(arr)=>{
-//     const label=arr.map(label=>`<div class="p-2 text-[#ef4444FF] text-xs font-medium bg-[#feecec] border border-[#fecacaFF] rounded-[100px] inline-flex justify-center items-center gap-1">
-//                             <i class="fa-solid fa-bug"></i>
+//     const label=arr.map(label=>`<div class="p-2 text-black text-xs font-medium bg-yellow-400 border border-yellow-500 rounded-[100px] inline-flex justify-center items-center gap-1">
 //                             <p>${label}</p>
 //                         </div>`).join(" ");
 //     return label;
@@ -98,35 +95,6 @@ const labels = (arr) => {
     },
   };
 
-// const labels = (arr) => {
-//   const labelInfo = {
-//     bug: {
-//       color: "#ef4444",
-//       bg: "#feecec",
-//       border: "#fecaca",
-//     },
-//     "help wanted": {
-//       color: "#d97706",
-//       bg: "#fff8db",
-//       border: "#fde68a",
-//     },
-//     enhancement: {
-//       color: "#16a34a",
-//       bg: "#dcfce7",
-//       border: "#86efac",
-//     },
-//     "good first issue": {
-//       color: "#2563eb",
-//       bg: "#dbeafe",
-//       border: "#93c5fd",
-//     },
-//     documentation: {
-//       color: "#6b7280",
-//       bg: "#f3f4f6",
-//       border: "#d1d5db",
-//     },
-//   };
-
   return arr
     .map((label) => {
       const style = labelInfo[label.toLowerCase()];
@@ -140,26 +108,28 @@ const labels = (arr) => {
 };
 
 const formatDate = (isoDate) => {
-    const date = new Date(isoDate);
-    const formatted = date.toLocaleDateString("en-GB");
-    return formatted;
-  };
+  const date = new Date(isoDate);
+  const formatted = date.toLocaleDateString("en-GB");
+  return formatted;
+};
 
-const cardDetails=async (id)=>{
+const cardDetails = async (id) => {
   addLoadSpinner(true);
-  const res=await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`);
-  const json=await res.json();
+  const res = await fetch(
+    `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`,
+  );
+  const json = await res.json();
   displayDetails(json.data);
   addLoadSpinner(false);
   document.getElementById("card-details").showModal();
-}
-  const displayDetails=(card)=>{
-  cardInfo.innerHTML="";
-  const div=document.createElement("div");
-  div.innerHTML=`
+};
+const displayDetails = (card) => {
+  cardInfo.innerHTML = "";
+  const div = document.createElement("div");
+  div.innerHTML = `
   <div class="card-info-container">
           <dialog id="card-details" class="modal modal-bottom sm:modal-middle">
-            <div class="modal-box p-8">
+            <div class="modal-box p-3 md:p-8">
               <h3 class="text-2xl font-bold mb-2">${card.title}</h3>
               <ul class="flex gap-2 mb-6">
                 <li class="badge badge-success text-white font-medium border rounded-[100px]">${card.status}</li>
@@ -194,10 +164,10 @@ const cardDetails=async (id)=>{
         </div>
   `;
   cardInfo.appendChild(div);
-}
+};
 
 const allCards = async () => {
-  addLoadSpinner(true)
+  addLoadSpinner(true);
   const res = await fetch(
     "https://phi-lab-server.vercel.app/api/v1/lab/issues",
   );
@@ -212,13 +182,12 @@ const display = (cards) => {
   cardContainer.innerHTML = "";
   issueCount.innerText = "";
 
-
   cards.forEach((card) => {
     const div = document.createElement("div");
-    div.className = `card border border-[#e4e4e7FF] hover:scale-102 transition ${card.status === "open" ? "border-4 border-t-green-500" : "border-4 border-t-violet-500"} rounded-md shadow-md`;
-    div.addEventListener("click", ()=>{
-        cardDetails(card.id)
-    })
+    div.className = `card border border border-[#e4e4e7FF] hover:scale-102 transition ${card.status === "open" ? "border-4 border-t-green-500" : "border-4 border-t-violet-500"} rounded-md shadow-md`;
+    div.addEventListener("click", () => {
+      cardDetails(card.id);
+    });
     div.innerHTML = `
         <div class="card-top p-4 h-full">
                         <div class="flex justify-between items-center mb-3">
@@ -254,3 +223,34 @@ const display = (cards) => {
   });
 };
 allCards();
+
+// document.getElementById("search").addEventListener("click",()=>{
+//   const input = document.getElementById("search");
+//   const searchValue=input.value.trim().toLowerCase();
+//   fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchValue}`)
+//   .then(res=>res.json())
+//   .then(json=>{
+//     const searchCards=json.data;
+//     console.log(allWords)
+//     const filterCards=allWords.filter(word=>word.word.toLowerCase().includes(searchValue));
+//     displayWords(filterWords);
+//   })
+// })
+document.getElementById("search").addEventListener("input", async () => {
+  const input = document.getElementById("search");
+  const searchValue = input.value.trim().toLowerCase();
+
+  let url;
+
+  if (searchValue === "") {
+    url = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
+  } else {
+    url = `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchValue}`;
+  }
+  const res = await fetch(url);
+  const json = await res.json();
+  const searchCards = json.data;
+
+  display(searchCards);
+  issueCount.innerText = searchCards.length;
+});
